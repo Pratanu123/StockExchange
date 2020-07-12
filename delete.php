@@ -1,8 +1,8 @@
-<?php 
+<?php
 require 'configs/dbConfig.php';
 
-$db=new dbConfig();
-$dbconn=$db->getConnection();
+$db = new dbConfig();
+$dbconn = $db->getConnection();
 
 $sql = "DELETE from stock";
 $result = $dbconn->query($sql);

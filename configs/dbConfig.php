@@ -18,5 +18,4 @@
 			$this->dbconn=null;
 		}
 	}
-
 ?>
