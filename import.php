@@ -15,8 +15,8 @@ if (!empty($_FILES['csv_file']['name'])) {
             'stock_name'  => $row[2],
             'stock_price'  => $row[3]
         );
-
-        $import = $dbconn->exec("INSERT into  stock (id,date,name,price)  values('$row[0]','$row[1]','$row[2]','$row[3]')");
+        $date=date("Y-m-d",strtotime($row[1]));
+        $import = $dbconn->exec("INSERT into  stock (id,date,name,price)  values('$row[0]','$date','$row[2]','$row[3]')");
     }
     echo json_encode($data);
 }

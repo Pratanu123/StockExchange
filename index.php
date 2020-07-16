@@ -60,7 +60,7 @@
                     </tr>
                 </thead>
             </table>
-        </div class="col-md-3">
+        </div>
         <div class="col-md-5" name="delete-div" id="delete-div" style="display:none">
             <input type="submit" name="delete" id="delete" value="Delete All Record" style="margin-top:10px;" class="btn btn-info" />
         </div>
