@@ -19,7 +19,7 @@ $result = $dbconn->query($sql);
     <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
     <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
-  
+
 
 </head>
 
@@ -42,8 +42,8 @@ $result = $dbconn->query($sql);
         </nav>
         <div class="jumbtron" style="text-align: center;">
             <h3>Lets Trade</h3>
-            <br/>
-            <br/>
+            <br />
+            <br />
             <form class="form-inline " id="filterdata">
                 <div class="form-group">
                     <input id="datepickerFrom" type="text" placeholder="From Date">
@@ -67,8 +67,9 @@ $result = $dbconn->query($sql);
                 <button type="submit" class="btn btn-success">Apply</button>
             </form>
         </div>
-        <br/>
-        <br/>
+        <br />
+        <br />
+
         <div class="table-responsive">
             <table class="table table-striped table-bordered" id="data-table" style="width: 100%;">
                 <thead>
@@ -82,6 +83,14 @@ $result = $dbconn->query($sql);
                 </thead>
             </table>
         </div>
+        <br />
+        <br />
+        <div class="jumbtron" name="jumbo" id="jumbo" style="text-align: center; display:none">
+            <button class="btn btn-success" onclick="getSelected()">Buy</button>
+            <button type="submit" class="btn btn-success">Sell</button>
+            <br />
+        </div>
+
     </div>
 
 
@@ -95,7 +104,12 @@ $result = $dbconn->query($sql);
         width: "255px",
     });
     datepicker2.appendTo('#datepickerTo');
-    
+
+    function getSelected() {
+        var selectId = table.column(0).check
+        alert(selectId);
+    }
+    var table;
     $(document).ready(function() {
         $('#filterdata').on('submit', function(event) {
             event.preventDefault();
@@ -108,27 +122,33 @@ $result = $dbconn->query($sql);
                 cache: false,
                 processData: false,
                 success: function(jsonData) {
+                    $('#jumbo').css({
+                        "display": "block"
+                    });
                     $('#datepickerFrom').val('');
                     $('#datepickerTo').val('');
                     $('#company').val('');
-                    $('#data-table').DataTable({
+                    table = $('#data-table').DataTable({
                         columnDefs: [{
-                            orderable:false,
+                            orderable: false,
                             defaultContent: '',
-                            className:'select-checkbox',
+                            className: 'select-checkbox',
                             targets: 0,
                             checkboxes: {
                                 selectRow: false
                             }
                         }],
-                        select: {style: 'os',
-                            selector:'td:first-child'
+                        select: {
+                            style: 'os',
+                            selector: 'td:first-child'
                         },
-                        order: [[1,'asc']],
+                        order: [
+                            [1, 'asc']
+                        ],
                         data: jsonData,
                         columns: [{
-                            data: "id"
-                        },
+                                data: "id"
+                            },
                             {
                                 data: "stock_id"
                             },
@@ -142,11 +162,11 @@ $result = $dbconn->query($sql);
                                 data: "stock_price"
                             }
                         ]
-                        
+
                     });
+
                 }
             });
         });
     });
-
 </script>
